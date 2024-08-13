@@ -17,7 +17,7 @@ const Rooms = () => {
       setLoading(true); // Set loading to true before fetching
       try {
         const response = await axios.get(
-          `http://localhost:5000/rooms?page=${currentPage}&priceRange=${priceFilter}`
+          `https://lodgio-server.vercel.app/rooms?page=${currentPage}&priceRange=${priceFilter}`
         );
         setRoomData(response.data.rooms);
         setTotalPages(response.data.totalPages);

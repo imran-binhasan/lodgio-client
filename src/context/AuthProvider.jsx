@@ -32,7 +32,7 @@ const handleGoogleLogin = ()=> {
     .then(res => {
         const user = res.user;
         setUser(user);
-        axios.post("http://localhost:5000/jwt", user, {
+        axios.post("https://lodgio-server.vercel.app/jwt", user, {
             withCredentials: true, // Ensures cookies are included in the request
           });
     })
@@ -62,7 +62,6 @@ const logoutUser = () => {
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, currentUser=>{
                 setUser(currentUser);
-                console.log('Updated')
                 setLoading(false)
         });
         return ()=> unsubscribe();

@@ -7,7 +7,7 @@ const FeaturedRooms = () => {
 
   const [rooms,setRooms] = useState([]);
   useEffect(()=>{
-    axios.get('http://localhost:5000/room/rated')
+    axios.get('https://lodgio-server.vercel.app/room/rated')
     .then(res => setRooms(res.data))
   },[])
 

@@ -38,7 +38,7 @@ const Router = createBrowserRouter([
       {
         path:'/room/:id',
         element:<RoomDetails/>,
-        loader:({params})=>fetch(`http://localhost:5000/room/${params.id}`)
+        loader:({params})=>fetch(`https://lodgio-server.vercel.app/room/${params.id}`)
       }
       
     ],

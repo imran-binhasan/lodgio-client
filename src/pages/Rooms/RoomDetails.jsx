@@ -56,7 +56,7 @@ const RoomDetails = () => {
       .then(() => {
         // Update room status to booked
         return axios.patch(`http://localhost:5000/room/${_id}`, {
-          booked: false,
+          booked: true,
         });
       })
       .then(() => {

@@ -10,6 +10,7 @@ import Gallery from "../pages/Gallery/Gallery";
 import RoomDetails from "../pages/Rooms/RoomDetails";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import BookingDetails from "../pages/MyBookings/BookingDetails";
 
 
 
@@ -29,6 +30,11 @@ const Router = createBrowserRouter([
       {
         path: '/bookings',
         element: <PrivateRoute><MyBookings/></PrivateRoute>
+      },
+      {
+        path:'/booking/:id',
+        element:<BookingDetails/>,
+        loader:({params})=>fetch(`http://localhost:5000/booking/${params.id}`)
       },
       {
         path:'/gallery',

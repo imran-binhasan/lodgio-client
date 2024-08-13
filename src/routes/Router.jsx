@@ -5,6 +5,7 @@ import Rooms from "../pages/Rooms/Rooms";
 import MyBookings from "../pages/MyBookings/MyBookings";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import Auth from "../layouts/Auth";
 
 
 
@@ -28,12 +29,18 @@ const Router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <Login/>
-  },
-  {
-    path: "/register",
-    element: <Register />
+    path:'/auth',
+    element:<Auth/>,
+    children:[
+      {
+        path: "login",
+        element: <Login/>
+      },
+      {
+        path: "register",
+        element: <Register />
+      }
+    ]
   }
 ]);
 

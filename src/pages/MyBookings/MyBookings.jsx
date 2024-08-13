@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 
 const MyBooking = () => {
-  const navigate = useNavigate();
   const [myBooking, setMyBooking] = useState([]);
   const { user } = useContext(AuthContext);
 
@@ -118,14 +117,14 @@ const MyBooking = () => {
   const handleCancelBooking = async (booking) => {
     const cancelLimitDate = moment(booking.selectedDate).subtract(1, "days");
     const today = moment();
-
+  
     if (today.isAfter(cancelLimitDate)) {
       toast.error(
         "Cancellation is no longer allowed. You can only cancel until one day before the booking date."
       );
       return;
     }
-
+  
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -141,6 +140,12 @@ const MyBooking = () => {
           await axios.patch(`http://localhost:5000/room/${booking.roomId}`, {
             booked: false,
           });
+  
+          // Update the state to remove the canceled booking
+          setMyBooking((prevBookings) =>
+            prevBookings.filter((b) => b._id !== booking._id)
+          );
+  
           toast.success("Booking cancelled successfully!");
         } catch (error) {
           console.error("Error cancelling booking:", error);
@@ -149,6 +154,7 @@ const MyBooking = () => {
       }
     });
   };
+  
   
   return (
     <>
@@ -161,83 +167,83 @@ const MyBooking = () => {
       </Helmet>
       <div className="max-w-6xl mx-auto px-4 py-8">
         <ToastContainer/>
-        <h1 className="text-4xl font-bold mb-8">My Bookings</h1>
+        <h1 className="text-4xl font-medium text-center mb-8">My Bookings</h1>
 
         {myBooking.length === 0 ? (
           <p className="text-gray-500 text-center">You have no bookings yet.</p>
         ) : (
           <table className="min-w-full bg-white border border-gray-200 shadow-lg rounded-lg overflow-hidden">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
-                  Image
-                </th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
-                  Room Name
-                </th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
-                  Hotel Name
-                </th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
-                  Price
-                </th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
-                  Selected Date
-                </th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
-                  Actions
-                </th>
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
+                Image
+              </th>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 hidden sm:table-cell">
+                Room Name
+              </th>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 hidden sm:table-cell">
+                Hotel Name
+              </th>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
+                Price
+              </th>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
+                Selected Date
+              </th>
+              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {myBooking.map((booking) => (
+              <tr
+                key={booking._id}
+                className="border-t border-gray-200 hover:bg-gray-50"
+              >
+                <td className="py-3 px-4 text-sm text-gray-700">
+                  <img
+                    src={booking.imageUrl}
+                    alt={`${booking.roomName}`}
+                    className="w-16 h-16 object-cover rounded-md"
+                  />
+                </td>
+                <td className="py-3 px-4 text-sm text-gray-700 hidden sm:table-cell">
+                  {booking.roomName}
+                </td>
+                <td className="py-3 px-4 text-sm text-gray-700 hidden sm:table-cell">
+                  {booking.hotelName}
+                </td>
+                <td className="py-3 px-4 text-sm text-gray-700">
+                  ${booking.pricePerNight * booking.nights}
+                </td>
+                <td className="py-3 px-4 text-sm text-gray-700">
+                  {moment(booking.selectedDate).format("MMMM Do YYYY")}
+                </td>
+                <td className="py-3 px-4 md:space-x-2 text-sm">
+                  <button
+                    onClick={() => openDateModal(booking)}
+                    className="bg-yellow-500 text-white py-2 text:sm md:text-md px-4 rounded-md hover:bg-yellow-600 transition duration-300 w-full sm:w-auto mb-2 sm:mb-0"
+                  >
+                    Update Date
+                  </button>
+                  <button
+                    onClick={() => handleReviewClick(booking)}
+                    className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 w-full sm:w-auto mb-2 sm:mb-0"
+                  >
+                    Review
+                  </button>
+                  <button
+                    onClick={() => handleCancelBooking(booking)}
+                    className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-300 w-full sm:w-auto"
+                  >
+                    Cancel
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {myBooking.map((booking) => (
-                <tr
-                  key={booking._id}
-                  className="border-t border-gray-200 hover:bg-gray-50"
-                >
-                  <td className="py-3 px-4 text-sm text-gray-700">
-                    <img
-                      src={booking.imageUrl}
-                      alt={`${booking.roomName}`}
-                      className="w-16 h-16 object-cover rounded-md"
-                    />
-                  </td>
-                  <td className="py-3 px-4 text-sm text-gray-700">
-                    {booking.roomName}
-                  </td>
-                  <td className="py-3 px-4 text-sm text-gray-700">
-                    {booking.hotelName}
-                  </td>
-                  <td className="py-3 px-4 text-sm text-gray-700">
-                    ${booking.pricePerNight * booking.nights}
-                  </td>
-                  <td className="py-3 px-4 text-sm text-gray-700">
-                    {moment(booking.selectedDate).format("MMMM Do YYYY")}
-                  </td>
-                  <td className="py-3 px-4 text-sm">
-                    <button
-                      onClick={() => openDateModal(booking)}
-                      className="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600 transition duration-300 mr-2"
-                    >
-                      Update Date
-                    </button>
-                    <button
-                      onClick={() => handleReviewClick(booking)}
-                      className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
-                    >
-                      Review
-                    </button>
-                    <button
-                      onClick={() => handleCancelBooking(booking)}
-                      className="bg-red-500 text-white py-2 px-4 ml-2 rounded-md hover:bg-red-600 transition duration-300"
-                    >
-                      Cancel
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+          </tbody>
+        </table>
         )}
 
         {/* Review Modal */}

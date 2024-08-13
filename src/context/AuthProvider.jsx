@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import AuthContext from "./AuthContext";
 import { auth } from "../configs/firebase";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 
@@ -13,12 +14,10 @@ const [user,setUser] = useState(null)
 
 
 const createUser = (email, password) => {
-    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const loginUser = (email, password) => {
-    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -28,12 +27,14 @@ const createUser = (email, password) => {
 
 
 const handleGoogleLogin = ()=> {
-    setLoading(true)
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
     .then(res => {
         const user = res.user;
-        setUser(user)
+        setUser(user);
+        axios.post("http://localhost:5000/jwt", user, {
+            withCredentials: true, // Ensures cookies are included in the request
+          });
     })
     .catch((error) => {
         console.log(error.message); 

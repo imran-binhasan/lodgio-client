@@ -7,7 +7,7 @@ const Map = () => {
   const myAddress = "Gulshan, Dhaka, Bangladesh";
 
   return (
-    <div className="w-full h-[400px] md:h-[600px] relative overflow-hidden z-20">
+    <div className="w-full h-[65vh] relative overflow-hidden z-20">
        <h2 className="text-center text-3xl font-medium mb-6">Our Location</h2>
       <MapContainer
         center={myLocation}

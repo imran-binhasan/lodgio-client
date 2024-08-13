@@ -27,7 +27,7 @@ const Gallery = () => {
         <title>Gallery - Luxury Hotel</title>
         <meta name="description" content="Explore the stunning gallery of our luxury hotel." />
       </Helmet>
-      <section className="min-h-screen bg-gray-50 py-16 px-4">
+      <section className="min-h-screen bg-gray-50 py-12 px-4">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: -50 }}

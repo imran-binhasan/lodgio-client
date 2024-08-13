@@ -16,9 +16,9 @@ const SplashScreen = ({ onComplete }) => {
 
       if (currentStep >= steps.length) {
         clearInterval(interval);
-        setTimeout(onComplete, 500); // Call onComplete when progress reaches 100
+        setTimeout(onComplete, 400); // Call onComplete when progress reaches 100
       }
-    }, 300); // Increment every 300ms
+    }, 200); // Increment every 300ms
 
     return () => clearInterval(interval); // Cleanup on component unmount
   }, [onComplete]);
@@ -49,7 +49,7 @@ const SplashScreen = ({ onComplete }) => {
             }}
             transition={{
               delay: 0.2 * index, // Stagger the animation of each letter
-              duration: 0.5,
+              duration: 0.4,
             }}
           >
             {letter}

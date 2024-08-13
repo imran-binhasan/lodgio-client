@@ -27,6 +27,9 @@ const BookingDetails = () => {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   const loggedInUser = user.displayName || 'Guest' ;
+  const email = user.email;
+  const photoURL = user.photoURL;
+  const reviewState = bookingData.isReviewed || false;
   const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
@@ -50,13 +53,24 @@ const BookingDetails = () => {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     const timestamp = new Date().toISOString();
-    const reviewData = { username: loggedInUser, rating, comment: review, timestamp, roomId };
-    await axios.post(`http://localhost:5000/reviews`, reviewData);
+    const reviewData = { username: loggedInUser,email,userImage: photoURL, rating, comment: review, timestamp, bookingId : _id};
+    console.log(reviewData)
+    await axios.post(`http://localhost:5000/room/${roomId}`, reviewData);
+    await axios.patch(`http://localhost:5000/booking/review/${_id}`,{isReviewed : true})
     setMessage("Review submitted successfully!");
     setIsReviewModalOpen(false);
     setRating(0);
     setReview("");
   };
+
+  const handleReviewDelete = async (e) => {
+    e.preventDefault()
+    await axios.delete(`http://localhost:5000/room/${roomId}`, { params: { _id } });
+
+    await axios.patch(`http://localhost:5000/booking/review/${_id}`,{isReviewed : false})
+  }
+
+  console.log(reviewState)
 
   return (
     <div className="p-6 md:p-10 max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg">
@@ -118,14 +132,25 @@ const BookingDetails = () => {
 
           <div className="mt-12">
             <button
+              disabled={reviewState == true}
               onClick={() => setIsReviewModalOpen(true)}
               className="bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 transition"
             >
-              Give Review
+              {reviewState?'Rated':'Rate Experience'}
+            </button>
+          </div>
+          <div className="mt-12">
+            <button
+            onClick={handleReviewDelete}
+              className="bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 transition"
+            >
+             delete
             </button>
           </div>
         </>
       )}
+
+      
 
       {isReviewModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -177,6 +202,8 @@ const BookingDetails = () => {
           </div>
         </div>
       )}
+
+
 
       {message && (
         <div className="mt-4 p-3 text-center bg-gray-100 dark:bg-gray-700 rounded-md">

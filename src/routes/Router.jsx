@@ -11,6 +11,7 @@ import RoomDetails from "../pages/Rooms/RoomDetails";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import BookingDetails from "../pages/MyBookings/BookingDetails";
+import NotFound from "../pages/Error/NotFound";
 
 
 
@@ -33,7 +34,7 @@ const Router = createBrowserRouter([
       },
       {
         path:'/booking/:id',
-        element:<BookingDetails/>,
+        element:<PrivateRoute><BookingDetails/></PrivateRoute>,
         loader:({params})=>fetch(`http://localhost:5000/booking/${params.id}`)
       },
       {
@@ -61,6 +62,10 @@ const Router = createBrowserRouter([
         element: <PublicRoute><Register/></PublicRoute>
       }
     ]
+  },
+  {
+    path: "*",
+    element: <NotFound />
   }
 ]);
 

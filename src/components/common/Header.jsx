@@ -51,6 +51,7 @@ const Header = () => {
             GALLERY
           </NavLink>
         </li>
+        {user?
         <li>
           <NavLink
             to="/bookings"
@@ -61,6 +62,8 @@ const Header = () => {
             MY BOOKINGS
           </NavLink>
         </li>
+        :
+        ''}
       </ul>
 
       {/* Mobile Menu */}

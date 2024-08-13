@@ -134,7 +134,6 @@ const BookingDetails = () => {
 
       setIsReviewModalOpen(false);
       setRating(0);
-      setReview("");
       
     } catch (error) {
       console.error("Error submitting review:", error);
@@ -164,7 +163,8 @@ const BookingDetails = () => {
           });
           await axios.patch(`http://localhost:5000/booking/review/${_id}`, {
             isReviewed: false,
-          });
+          })
+          setShouldFetch((prev) => !prev);
           toast.success("Review deleted successfully!");
           setMyReview('')
         } catch (error) {

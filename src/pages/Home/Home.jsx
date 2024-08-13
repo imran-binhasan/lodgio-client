@@ -2,6 +2,8 @@ import Banner from "./Banner";
 import FeaturedRooms from "./FeaturedRooms";
 import Map from "./Map";
 import { Helmet } from "react-helmet";
+import ReviewsCarousel from "./ReviewsCarousel";
+
 const Home = () => {
   return (
     <>
@@ -15,6 +17,7 @@ const Home = () => {
       <Banner />
       <FeaturedRooms />
       <Map />
+      <ReviewsCarousel/>
     </>
   );
 };

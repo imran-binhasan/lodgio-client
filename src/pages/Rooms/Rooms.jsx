@@ -20,8 +20,8 @@ const Rooms = () => {
     console.log(event.target.value)
     axios
       .get(`http://localhost:5000/rooms?priceRange=${event.target.value}`)
-      .then(() => {
-        // Handle filtered data (response.data)
+      .then((res) => {
+        setRoomData(res.data)
       })
       .catch((err) => console.error("Error fetching filtered rooms:", err));
   };
@@ -67,11 +67,11 @@ const Rooms = () => {
                 className="mt-2 p-2 w-full border border-gray-300 rounded-md shadow-sm hover:border-gray-500 transition duration-300"
               >
                 <option value="">Select Price Range</option>
-                <option value="lowest">Lowest</option>
+                <option value="lowest-first">Lowest to Highest</option>
                 <option value="100-200">$100 - $200</option>
                 <option value="200-300">$200 - $300</option>
                 <option value="300-400">$300 - $400</option>
-                <option value="highest"> Highest</option>
+                <option value="highest-first"> Highest to Lowest</option>
                
               </select>
             </div>

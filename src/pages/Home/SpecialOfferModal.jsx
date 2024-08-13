@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { motion } from "framer-motion"; // For animation
 
 const SpecialOffersModal = ({ isOpen, onClose }) => {
   const [timeLeft, setTimeLeft] = useState("");
@@ -7,7 +8,7 @@ const SpecialOffersModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    const offerEndDate = new Date().getTime() + 20 * 24 * 60 * 60 * 1000; // 20 days from now
+    const offerEndDate = new Date("2025-01-10T23:59:59").getTime(); // Deadline: January 10, 2025
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -24,7 +25,7 @@ const SpecialOffersModal = ({ isOpen, onClose }) => {
 
         setTimeLeft(`${days}D ${hours}H ${minutes}M ${seconds}S`);
       }
-    }, 1000);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, [isOpen]);
@@ -32,36 +33,71 @@ const SpecialOffersModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div
-        className="p-8 rounded-lg shadow-lg max-w-md w-full relative bg-cover bg-center"
-        style={{
-          backgroundImage: "url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/ad8a7a119879081.60f70c7ef2c1d.gif')", // Replace with your background image URL
-        }}
-      >
-        <div className="absolute inset-0 bg-opacity-60 rounded-lg"></div>
-        <div className="relative z-10 flex justify-between items-center mb-6">
-          <h3 className="text-3xl font-medium text-white">SPECIAL OFFER!</h3>
-          <button onClick={onClose} className="text-white text-3xl">
-            <AiOutlineClose />
-          </button>
+    <motion.div
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full flex overflow-hidden relative">
+        {/* Left Image Section */}
+        <div className="w-1/2">
+          <img
+            src="https://i.ibb.co.com/6mrSYbP/The-Peninsula-Bangkok-The-Pool-11-min-optimized-200.jpg"
+            alt="Special Offer"
+            className="w-full h-full object-cover rounded-l-lg"
+          />
         </div>
 
-        {/* Countdown Timer */}
-        <div className="relative z-10 text-4xl font-medium text-white text-center mb-6">
-          {timeLeft !== "OFFER EXPIRED" ? (
-            <p className="bg-black bg-opacity-50 inline-block py-2 px-4 rounded-md">{timeLeft}</p>
-          ) : (
-            <p className="text-red-500">OFFER EXPIRED</p>
-          )}
-        </div>
+        {/* Right Content Section */}
+        <div
+          className="w-1/2 p-6 relative bg-cover bg-center rounded-r-lg flex flex-col justify-between"
+          style={{
+            backgroundImage:
+              "url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/ad8a7a119879081.60f70c7ef2c1d.gif')",
+          }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50 rounded-r-lg"></div>
 
-        {/* Offer Description */}
-        <p className="relative z-10 text-xl text-white mt-4 text-center font-semibold">
-          GET 20% OFF ON ALL BOOKINGS MADE THIS MONTH!
-        </p>
+          <div className="relative z-10 flex flex-col justify-between h-full">
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-white text-3xl transition-all hover:scale-110"
+            >
+              <AiOutlineClose />
+            </button>
+
+            {/* Header */}
+            <h3 className="text-4xl  text-white text-center mb-4">
+              SPECIAL OFFER!
+            </h3>
+
+            {/* Countdown Timer */}
+            <div className="text-2xl font-medium text-white text-center mb-4">
+              {timeLeft !== "OFFER EXPIRED" ? (
+                <motion.p
+                  className="bg-black bg-opacity-60 inline-block  px-4 rounded-md"
+                  key={timeLeft}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {timeLeft}
+                </motion.p>
+              ) : (
+                <p className="text-red-500 text-xl font-semibold">OFFER EXPIRED</p>
+              )}
+            </div>
+
+            {/* Offer Description */}
+            <p className="text-2xl text-white text-center font-medium">
+              GET 20% OFF ON ALL BOOKINGS MADE THIS MONTH!
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

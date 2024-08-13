@@ -5,6 +5,7 @@ import AuthContext from "../../context/AuthContext";
 import { toast, ToastContainer } from 'react-toastify'; // Import React Toastify
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2'
+import axios from "axios";
 
 const Register = () => {
   const{handleGoogleLogin,createUser,updateNewUser,user} = useContext(AuthContext);
@@ -27,6 +28,10 @@ const Register = () => {
     }
     createUser(email,password)
     .then(() => {
+        // Request JWT token from the server
+        axios.post("https://lodgio-server.vercel.app/jwt", user, {
+          withCredentials: true, // Ensures cookies are included in the request
+        });
         updateNewUser({
             displayName:name,
             photoURL:photoURL

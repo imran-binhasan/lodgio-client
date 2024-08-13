@@ -1,12 +1,32 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-
+import { Helmet } from "react-helmet";
+import Swal from 'sweetalert2'
 const Login = () => {
-  const {handleGoogleLogin} = useContext(AuthContext);
-
+  const {handleGoogleLogin,loginUser} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const formData =new FormData(e.target);
+    const {email, password} = Object.fromEntries(formData.entries());
+    loginUser(email, password)
+    .then(()=>{
+      Swal.fire({
+        title: `Welcome`,
+        text: "You have signed in successfully!",
+        icon: "success"
+      });
+      navigate(`${location.state?location.state:'/'}`)
+    })
+  }
   
   return (
+    <>
+    <Helmet>
+      <title>Login - Lodgio</title>
+      <meta name="description" content="Log in to your Lodgio account to manage bookings and more." />
+    </Helmet>
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center relative">
       {/* Video Background with Blur */}
       <video
@@ -22,9 +42,9 @@ const Login = () => {
       <div className="absolute top-0 left-0 w-full p-4 bg-transparent z-20">
         <div className="flex justify-between items-center">
           <h3 className="text-white text-2xl font-medium"><Link to={'/'}>LODGIO</Link></h3>
-          <p className="text-gray-300">
+          <p className="text-gray-300 border rounded p-1">
             Don't have an account?{" "}
-            <Link className="text-white font-medium hover:underline" to={"/auth/register"}>
+            <Link className="text-white underline-offset-2 hover:text-yellow-400 hover:underline" to={"/auth/register"}>
               Register
             </Link>
           </p>
@@ -34,7 +54,7 @@ const Login = () => {
       {/* Sign-in Card Content */}
       <div className="relative w-full max-w-md bg-white bg-opacity-90 rounded-lg shadow-xl p-8 z-10">
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-extrabold text-gray-900">Sign in</h2>
+          <h2 className="text-3xl font-semibold text-gray-900">Sign in</h2>
         </div>
 
         {/* Social login buttons */}
@@ -49,7 +69,7 @@ const Login = () => {
         <p className="text-center text-sm text-gray-500 mb-6">Or continue with email address</p>
 
         {/* Sign-in Form */}
-        <form className="space-y-6">
+        <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <input
               type="email"
@@ -77,6 +97,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

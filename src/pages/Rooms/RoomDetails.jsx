@@ -33,6 +33,7 @@ const RoomDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [nights, setNights] = useState(1); // State for number of nights
+ 
 
   const totalCost = nights * pricePerNight;
 
@@ -79,7 +80,10 @@ const RoomDetails = () => {
         <meta name="description" content="Room Details" />
       </Helmet>
 
+
+
         <div className="max-w-6xl mx-auto px-4 py-8">
+
       {/* Image Section */}
       <div className="mb-6">
         <img
@@ -126,7 +130,7 @@ const RoomDetails = () => {
           <ul className="space-y-4 mb-6">
             {extraServices.map((service, index) => (
               <li key={index} className="text-gray-700">
-                <strong>{service.name}:</strong> {service.description}
+                <strong>{service.name}:</strong> ${service.price}
               </li>
             ))}
           </ul>

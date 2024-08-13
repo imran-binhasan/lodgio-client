@@ -28,7 +28,7 @@ const Map = () => {
 
       {/* Optional overlay text */}
       <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 text-white text-center z-10">
-        <h3 className="text-3xl font-semibold tracking-wider shadow-lg">Luxury Hotel Location</h3>
+        <h3 className="text-3xl font-semibold tracking-wider">Our Location</h3>
         <p className="mt-2 text-lg md:text-xl shadow-md">
           Find us at this premium location in the heart of Dhaka.
         </p>

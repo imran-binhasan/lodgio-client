@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaBed, FaSwimmer, FaConciergeBell } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const images = [
   "https://i.ibb.co.com/9bLp66F/1-9.jpg", // Replace with your image paths
@@ -59,6 +60,11 @@ const Gallery = () => {
   }, []);
 
   return (
+    <>
+    <Helmet>
+      <title>Gallery - Lodgio</title>
+      <meta name="description" content="Explore our stunning gallery showcasing the beauty of Lodgio." />
+    </Helmet>
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 text-white">
 
       {/* Introduction Section */}
@@ -135,6 +141,7 @@ const Gallery = () => {
         </button>
       </section>
     </div>
+    </>
   );
 };
 

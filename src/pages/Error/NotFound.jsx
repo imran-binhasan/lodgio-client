@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gif404 from '../../assets/others/giphy.gif'
+import { Helmet } from 'react-helmet';
 const NotFound = () => {
   return (
+    <>
+    <Helmet>
+      <title>404 - Page Not Found</title>
+      <meta name="description" content="Oops! The page you are looking for does not exist." />
+    </Helmet>
     <motion.div
       className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-black"
       initial={{ opacity: 0 }}
@@ -58,6 +64,7 @@ const NotFound = () => {
         </motion.div>
       </motion.div>
     </motion.div>
+    </>
   );
 };
 

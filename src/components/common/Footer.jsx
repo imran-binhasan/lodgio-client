@@ -18,8 +18,8 @@ const Footer = () => {
           {/* Contact Info Section */}
           <div className="flex flex-col sm:w-1/3">
             <h2 className="font-medium text-xl mb-2">Contact Info</h2>
-            <p>Email: lodgio@hotmail.com</p>
-            <p>Phone: +024620022003</p>
+            <p>Email: support@lodgio.com</p>
+            <p>Phone: +88 016-0126-2260</p>
           </div>
 
           {/* Social Links Section */}

@@ -9,8 +9,7 @@ import moment from "moment";
 
 const MyBooking = () => {
   const [myBooking, setMyBooking] = useState([]);
-  const { user } = useContext(AuthContext);
-
+  const { user} = useContext(AuthContext);
   // States for Modals and Inputs
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [review, setReview] = useState("");
@@ -163,7 +162,7 @@ const MyBooking = () => {
           content="View and manage your bookings at Lodgio."
         />
       </Helmet>
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="lg:w-11/12 mx-auto px-4 py-8">
         <ToastContainer/>
         <h1 className="text-4xl font-medium text-center mb-8">My Bookings</h1>
 
@@ -173,22 +172,22 @@ const MyBooking = () => {
           <table className="min-w-full bg-white border border-gray-200 shadow-lg rounded-lg overflow-hidden">
           <thead className="bg-gray-100">
             <tr>
-              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
+              <th className="py-3 px-2 md:px-4 text-left text-sm font-semibold text-gray-700 hidden sm:table-cell">
                 Image
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 hidden sm:table-cell">
+              <th className="py-3 px-2 md:px-4 text-left text-sm font-semibold text-gray-700">
                 Room Name
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 hidden sm:table-cell">
+              <th className="py-3 px-2 md:px-4 text-left text-sm font-semibold text-gray-700 hidden sm:table-cell">
                 Hotel Name
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
+              <th className="py-3 px-2 md:px-4 text-left text-sm font-semibold text-gray-700">
                 Price
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
-                Selected Date
+              <th className="py-3 px-2 md:px-4 text-left text-sm font-semibold text-gray-700">
+                Booked Date
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
+              <th className="py-3 px-2 md:px-4 text-left text-sm font-semibold text-gray-700">
                 Actions
               </th>
             </tr>
@@ -199,35 +198,35 @@ const MyBooking = () => {
                 key={booking._id}
                 className="border-t border-gray-200 hover:bg-gray-50"
               >
-                <td className="py-3 px-4 text-sm text-gray-700">
+                <td className="py-2 px-2 md:px-4 text-sm text-gray-700 hidden sm:table-cell">
                   <img
                     src={booking.imageUrl}
                     alt={`${booking.roomName}`}
-                    className="w-16 h-16 object-cover rounded-md"
+                    className="w-16 xl:w-28 lg:w-24 h-16 object-cover rounded-md"
                   />
                 </td>
-                <td className="py-3 px-4 text-sm text-gray-700 hidden sm:table-cell">
+                <td className="py-2 px-2 md:px-4 text-sm text-gray-700 ">
                   {booking.roomName}
                 </td>
-                <td className="py-3 px-4 text-sm text-gray-700 hidden sm:table-cell">
+                <td className="py-2 px-2 md:px-4 text-sm text-gray-700 hidden sm:table-cell">
                   {booking.hotelName}
                 </td>
-                <td className="py-3 px-4 text-sm text-gray-700">
+                <td className="py-2 px-2 md:px-4 text-sm text-gray-700">
                   ${booking.pricePerNight * booking.nights}
                 </td>
-                <td className="py-3 px-4 text-sm text-gray-700">
+                <td className="py-2 px-2 md:px-4 text-sm text-gray-700">
                   {moment(booking.selectedDate).format("MMMM Do YYYY")}
                 </td>
-                <td className="py-3 px-4 md:space-x-2 text-sm">
+                <td className="py-2 px-2 space-y-1 text-sm xl:space-x-4 xl:px-4">
                   <button
                     onClick={() => openDateModal(booking)}
-                    className="bg-yellow-500 text-white py-2 text:sm md:text-md px-4 rounded-md hover:bg-yellow-600 transition duration-300 w-full sm:w-auto mb-2 sm:mb-0"
+                    className="bg-yellow-500 text-white py-2 sm:px-2  lg:px-4 rounded-md hover:bg-yellow-600 transition duration-300 w-full sm:w-auto whitespace-nowrap mr-1"
                   >
                     Update Date
                   </button>
                   <button
                     onClick={() => handleReviewClick(booking)}
-                    className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 w-full sm:w-auto mb-2 sm:mb-0"
+                    className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 w-full sm:w-auto mr-1"
                   >
                     Review
                   </button>

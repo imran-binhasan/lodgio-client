@@ -8,7 +8,7 @@ const SpecialOffersModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    const offerEndDate = new Date("2025-01-10T23:59:59").getTime(); // Deadline: January 10, 2025
+    const offerEndDate = new Date("2025-02-10T23:59:59").getTime(); // Deadline: January 10, 2025
 
     const timer = setInterval(() => {
       const now = new Date().getTime();

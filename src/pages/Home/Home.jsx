@@ -4,10 +4,9 @@ import Map from "./Map";
 import { Helmet } from "react-helmet";
 import ReviewsCarousel from "./ReviewsCarousel";
 import { useEffect, useState } from "react";
-import SpecialOffersModal from "./SpecialOfferModal";
 import AboutUs from "./AboutUs";
 import { ToastContainer } from "react-toastify";
-import SpecialOffers from "./SpecialOffers";
+import Modal from "./Modal";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,10 +33,9 @@ const Home = () => {
       <Banner />
       <FeaturedRooms />
       <AboutUs/>
-      <SpecialOffers/>
       <Map />
       <ReviewsCarousel/>
-      <SpecialOffersModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
     </>
   );
 };

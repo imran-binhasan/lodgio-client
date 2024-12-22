@@ -6,6 +6,7 @@ import MyBookings from "../pages/MyBookings/MyBookings";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Auth from "../layouts/Auth";
+import Gallery from "../pages/Gallery/Gallery";
 
 
 
@@ -26,6 +27,11 @@ const Router = createBrowserRouter([
         path: '/mybookings',
         element: <MyBookings/>
       },
+      {
+        path:'/gallery',
+        element:<Gallery/>
+      },
+      
     ],
   },
   {

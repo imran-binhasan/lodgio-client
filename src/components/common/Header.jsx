@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing React Icons
+import AuthContext from "../../context/AuthContext";
 
 const Header = () => {
+  const{user,loading,logoutUser} = useContext(AuthContext)
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Track menu state (open/close)
   const navigate = useNavigate();
+  console.log(loading)
+  console.log(user)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
@@ -49,7 +53,7 @@ const Header = () => {
         </li>
         <li>
           <NavLink
-            to="/my-bookings"
+            to="/bookings"
             className={({ isActive }) =>
               `hover:text-yellow-400 ${isActive ? "text-yellow-400" : ""}`
             }
@@ -88,7 +92,7 @@ const Header = () => {
           </li>
           <li>
             <NavLink
-              to="/my-bookings"
+              to="/bookings"
               className={({ isActive }) =>
                 `hover:text-yellow-400 ${isActive ? "text-yellow-400" : ""}`
               }
@@ -100,12 +104,20 @@ const Header = () => {
       </div>
 
       {/* Login Button */}
+      {user?
+            <button
+            onClick={logoutUser}
+            className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 hidden md:block"
+          >
+            LOGOUT
+          </button>
+      :      
       <button
         onClick={() => navigate("/auth/login")}
         className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 hidden md:block"
       >
         LOGIN
-      </button>
+      </button>}
     </nav>
   );
 };

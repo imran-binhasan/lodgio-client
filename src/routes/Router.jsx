@@ -1,19 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../layouts/Main";
+import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import Rooms from "../pages/Rooms/Rooms";
 import MyBookings from "../pages/MyBookings/MyBookings";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import Auth from "../layouts/Auth";
+import AuthLayout from "../layouts/AuthLayout";
 import Gallery from "../pages/Gallery/Gallery";
+import RoomDetails from "../pages/Rooms/RoomDetails";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
 
 
 
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <MainLayout />,
     children: [
       {
         path: "/",
@@ -24,27 +27,32 @@ const Router = createBrowserRouter([
         element: <Rooms />
       },
       {
-        path: '/mybookings',
-        element: <MyBookings/>
+        path: '/bookings',
+        element: <PrivateRoute><MyBookings/></PrivateRoute>
       },
       {
         path:'/gallery',
         element:<Gallery/>
       },
+      {
+        path:'/room/:id',
+        element:<RoomDetails/>,
+        loader:({params})=>fetch(`http://localhost:5000/room/${params.id}`)
+      }
       
     ],
   },
   {
     path:'/auth',
-    element:<Auth/>,
+    element:<AuthLayout/>,
     children:[
       {
         path: "login",
-        element: <Login/>
+        element: <PublicRoute><Login/></PublicRoute>
       },
       {
         path: "register",
-        element: <Register />
+        element: <PublicRoute><Register/></PublicRoute>
       }
     ]
   }

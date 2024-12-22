@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 
 const Login = () => {
+  const {handleGoogleLogin} = useContext(AuthContext);
+
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center relative">
       {/* Video Background with Blur */}
@@ -35,7 +40,7 @@ const Login = () => {
         {/* Social login buttons */}
         <div className="flex justify-start items-center space-x-4 mb-6">
           <p className="text-sm text-gray-600">Continue with</p>
-          <button className="w-2/3 flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition duration-300">
+          <button onClick={handleGoogleLogin} className="w-2/3 flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition duration-300">
             <span className="h-5 w-5 mr-2">G</span>
             Google
           </button>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing React Icons
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <nav className="bg-gray-800 text-white py-4 px-6 flex justify-between items-center">
-      <div className="text-2xl">LODGIO</div>
+      <h3 className="text-white text-2xl font-medium"><Link to={'/'}>LODGIO</Link></h3>
 
       {/* Hamburger Icon for mobile (using React Icons) */}
       <div className="md:hidden" onClick={toggleMenu}>
@@ -101,7 +101,7 @@ const Header = () => {
 
       {/* Login Button */}
       <button
-        onClick={() => navigate("/login")}
+        onClick={() => navigate("/auth/login")}
         className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 hidden md:block"
       >
         LOGIN

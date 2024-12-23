@@ -1,9 +1,10 @@
 import axios from "axios";
-import { format } from "date-fns"; // For formatting dates
+import {useNavigate} from 'react-router-dom'
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 
 const MyBooking = () => {
+  const navigate = useNavigate();
 const [myBooking,setMyBooking] = useState([])
 const{user} = useContext(AuthContext)
   useEffect(()=>{
@@ -24,7 +25,7 @@ const{user} = useContext(AuthContext)
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {myBooking.map((booking) => (
             <div
-              key={booking.id}
+              key={booking._id}
               className="bg-white shadow-lg rounded-lg overflow-hidden"
             >
               <img
@@ -50,7 +51,7 @@ const{user} = useContext(AuthContext)
                   <strong>Total Price:</strong> $
                   {booking.pricePerNight * booking.nights}
                 </p>
-                <button className="bg-black text-white py-2 px-4 rounded-md w-full hover:bg-gray-800 transition duration-300">
+                <button onClick={()=> navigate(`/booking/${booking._id}`)} className="bg-black text-white py-2 px-4 rounded-md w-full hover:bg-gray-800 transition duration-300">
                   View Details
                 </button>
               </div>

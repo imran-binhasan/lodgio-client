@@ -5,6 +5,8 @@ import DatePicker from "react-datepicker"; // Install `react-datepicker` for the
 import "react-datepicker/dist/react-datepicker.css";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
+import PrivateRoute from "../../routes/PrivateRoute";
+import { Helmet } from "react-helmet";
 
 const RoomDetails = () => {
   const { user } = useContext(AuthContext);
@@ -71,7 +73,13 @@ const RoomDetails = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <>
+       <Helmet>
+        <title>{roomName} - Lodgio</title>
+        <meta name="description" content="Room Details" />
+      </Helmet>
+
+        <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Image Section */}
       <div className="mb-6">
         <img
@@ -124,21 +132,55 @@ const RoomDetails = () => {
           </ul>
 
           {/* Reviews */}
-          <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
-          {reviews?.length > 0 ? (
-            <ul className="space-y-4 mb-6">
-              {reviews?.map((review, index) => (
-                <li key={index} className="bg-gray-100 p-4 rounded-md">
-                  <p className="text-gray-800">{review.comment}</p>
-                  <span className="text-sm text-gray-500">
-                    - {review.userName}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500">No reviews available for this room.</p>
-          )}
+{/* Reviews Section */}
+<h2 className="text-2xl font-medium mb-4">
+  Reviews{" "}
+  <span className="text-gray-500 text-lg">
+    ({reviews?.length || 0} total)
+  </span>
+</h2>
+{reviews?.length > 0 ? (
+  <ul className="space-y-4 mb-6">
+    {reviews.map((review, index) => (
+      <li
+        key={index}
+        className="bg-gray-50 p-4 rounded-md shadow-md"
+      >
+        <div className="flex items-center mb-2">
+          <img
+            src={review.userImage}
+            alt={review.username}
+            className="w-10 h-10 rounded-full mr-3"
+            onError={(e) => {
+              e.target.onerror = null; // Prevent looping
+              e.target.src =
+                "https://img.icons8.com/pulsar-gradient/48/guest-male.png"; // Fallback image
+            }}
+          />
+          <div>
+            <h3 className="text-lg font-medium text-gray-800">
+              {review.username}
+            </h3>
+            <p className="text-gray-500 text-sm">
+              {new Date(review.timestamp).toLocaleDateString()} at{" "}
+              {new Date(review.timestamp).toLocaleTimeString()}
+            </p>
+          </div>
+        </div>
+        <div className="mb-2">
+          <span className="text-yellow-500">
+            {"★".repeat(review.rating)}
+            {"☆".repeat(5 - review.rating)}
+          </span>
+        </div>
+        <p className="text-gray-800">{review.comment}</p>
+      </li>
+    ))}
+  </ul>
+) : (
+  <p className="text-gray-500">No reviews available for this room.</p>
+)}
+
         </div>
 
         {/* Booking Section */}
@@ -149,7 +191,9 @@ const RoomDetails = () => {
           </h2>
           <button
             disabled={booked}
-            className={`w-full ${booked?'bg-gray-400':'hover:bg-gray-800 bg-gray-600'} text-white py-2 px-4 rounded-md transition duration-300`}
+            className={`w-full ${
+              booked ? "bg-gray-400" : "hover:bg-gray-800 bg-gray-600"
+            } text-white py-2 px-4 rounded-md transition duration-300`}
             onClick={() => setIsModalOpen(true)}
           >
             {booked ? "Unavailable" : "Book Now"}
@@ -159,7 +203,8 @@ const RoomDetails = () => {
 
       {/* Booking Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <PrivateRoute>
+                  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
             <h2 className="text-2xl font-semibold mb-4">Booking Summary</h2>
             <p className="text-gray-700 mb-2">
@@ -211,8 +256,10 @@ const RoomDetails = () => {
             </div>
           </div>
         </div>
+        </PrivateRoute>
       )}
     </div>
+    </>
   );
 };
 

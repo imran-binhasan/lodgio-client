@@ -2,6 +2,7 @@ import axios from "axios";
 import {useNavigate} from 'react-router-dom'
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
+import { Helmet } from "react-helmet";
 
 const MyBooking = () => {
   const navigate = useNavigate();
@@ -16,6 +17,11 @@ const{user} = useContext(AuthContext)
 
 
   return (
+    <>
+    <Helmet>
+      <title>My Bookings - Lodgio</title>
+      <meta name="description" content="View and manage your bookings at Lodgio." />
+    </Helmet>
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8">My Bookings</h1>
 
@@ -60,6 +66,7 @@ const{user} = useContext(AuthContext)
         </div>
       )}
     </div>
+    </>
   );
 };
 

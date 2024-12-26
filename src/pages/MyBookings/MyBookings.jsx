@@ -25,7 +25,7 @@ const MyBooking = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/bookings?email=${user.email}`)
+      .get(`https://lodgio-server.vercel.app/bookings?email=${user.email}`,{withCredentials:true})
       .then((res) => setMyBooking(res.data));
   }, [user.email]);
 
@@ -44,11 +44,11 @@ const MyBooking = () => {
 
     try {
       await axios.post(
-        `http://localhost:5000/room/${selectedRoomId}`,
+        `https://lodgio-server.vercel.app/room/${selectedRoomId}`,
         reviewData
       );
       await axios.patch(
-        `http://localhost:5000/booking/review/${selectedBookingId}`,
+        `https://lodgio-server.vercel.app/booking/review/${selectedBookingId}`,
         {
           isReviewed: true,
         }
@@ -85,7 +85,7 @@ const MyBooking = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/review/${booking.roomId}`,
+        `https://lodgio-server.vercel.app/review/${booking.roomId}`,
         { params: { bId: booking._id } }
       );
       setMyReview(res.data);
@@ -98,18 +98,17 @@ const MyBooking = () => {
 
   const handleUpdateDate = async () => {
     try {
-      await axios.patch(`http://localhost:5000/booking/${selectedBookingId}`, {
+      await axios.patch(`https://lodgio-server.vercel.app/booking/${selectedBookingId}`, {
         selectedDate: moment(newDate).toISOString(),
-      });
+      },{withCredentials:true});
       toast.success("Date updated successfully!");
   
       // Re-fetch updated bookings
-      const res = await axios.get(`http://localhost:5000/bookings?email=${user.email}`);
+      const res = await axios.get(`https://lodgio-server.vercel.app/bookings?email=${user.email}`,{withCredentials:true});
       setMyBooking(res.data);
   
       setIsDateModalOpen(false);
     } catch (error) {
-      console.error("Error updating date:", error);
       toast.error("Failed to update the date. Please try again.");
     }
   };
@@ -136,10 +135,10 @@ const MyBooking = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/booking/${booking._id}`);
-          await axios.patch(`http://localhost:5000/room/${booking.roomId}`, {
+          await axios.delete(`https://lodgio-server.vercel.app/booking/${booking._id}`,{withCredentials:true});
+          await axios.patch(`https://lodgio-server.vercel.app/room/${booking.roomId}`, {
             booked: false,
-          });
+          },{withCredentials:true});
   
           // Update the state to remove the canceled booking
           setMyBooking((prevBookings) =>

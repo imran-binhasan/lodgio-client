@@ -7,6 +7,8 @@ import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 import PrivateRoute from "../../routes/PrivateRoute";
 import { Helmet } from "react-helmet";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RoomDetails = () => {
   const { user } = useContext(AuthContext);
@@ -38,7 +40,7 @@ const RoomDetails = () => {
 
   const handleBooking = () => {
     if (!selectedDate) {
-      alert("Please select a date to proceed with the booking.");
+      toast.error("Please select a date to proceed with the booking.");
       return;
     }
 
@@ -54,21 +56,22 @@ const RoomDetails = () => {
 
     // Post booking details
     axios
-      .post("http://localhost:5000/bookings", booking)
+      .post("https://lodgio-server.vercel.app/bookings", booking,{withCredentials:true})
       .then(() => {
         // Update room status to booked
-        return axios.patch(`http://localhost:5000/room/${_id}`, {
+        return axios.patch(`https://lodgio-server.vercel.app/room/${_id}`, {
           booked: true,
-        });
+        },{withCredentials:true});
       })
       .then(() => {
         setIsModalOpen(false);
+        toast.success("Booked successfully")
         // Update local state to reflect the new booking status
         roomData.booked = true; // Direct modification of loader data
       })
       .catch((err) => {
         console.error("Error during booking:", err);
-        alert("Booking failed. Please try again.");
+        toast.error("Booking failed. Please try again.");
       });
   };
 
@@ -80,6 +83,7 @@ const RoomDetails = () => {
       </Helmet>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
+        <ToastContainer/>
         {/* Image Section */}
         <div className="mb-6">
           <img

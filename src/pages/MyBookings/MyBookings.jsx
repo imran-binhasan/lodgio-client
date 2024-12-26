@@ -45,13 +45,13 @@ const MyBooking = () => {
     try {
       await axios.post(
         `https://lodgio-server.vercel.app/room/${selectedRoomId}`,
-        reviewData
+        reviewData,{withCredentials:true}
       );
       await axios.patch(
         `https://lodgio-server.vercel.app/booking/review/${selectedBookingId}`,
         {
           isReviewed: true,
-        }
+        },{withCredentials:true}
       );
 
       Swal.fire({

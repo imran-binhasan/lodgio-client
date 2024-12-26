@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Helmet } from "react-helmet";
@@ -267,11 +266,15 @@ const MyBooking = () => {
                 </>
               ) : (
                 <>
-                  <h3 className="text-2xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-2">
                     Write a Review
                   </h3>
+                  <p className="md:text-lg">
+                    Your Name: {user.displayName}
+                  </p>
                   <div className="flex items-center space-x-2 mb-4">
-                    <p>Your Rating:</p>
+                  
+                    <p className="md:text-lg">Your Rating:</p>
                     {Array.from({ length: 5 }).map((_, index) => (
                       <button
                         key={index}

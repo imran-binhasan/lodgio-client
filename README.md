@@ -20,5 +20,9 @@ Lodgio simplifies hotel booking with an intuitive, responsive interface for brow
 - **React Icons:** For adding visually appealing icons.
 - **React Toastify:** Notifications for user feedback.
 - **Framer Motion:** Smooth animations.
-- **React Tooltip:** Tooltip feature for enhanced interactivity.
+- **GSAP:** Animation for slider.
+- **React Leaflet:** For map on Homepage.
+- **React Slick:** For review carousel.
+- **React Helmet:** For custom title and metadata.
+- **Moment JS:** For date updates.
 

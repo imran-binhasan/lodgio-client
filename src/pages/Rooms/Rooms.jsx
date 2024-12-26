@@ -54,7 +54,7 @@ const Rooms = () => {
       <div className="px-6 py-10">
         {/* Title and Description */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold">Our Rooms</h1>
+          <h1 className="text-4xl font-medium">Our Rooms</h1>
           <p className="text-gray-600 mt-4">
             Indulge in the ultimate blend of elegance and comfort in our
             meticulously designed rooms. Choose your room today.
@@ -114,7 +114,7 @@ const Rooms = () => {
                     {/* Room Info */}
                     <div className="p-4 flex justify-between items-center">
                       <div>
-                        <h3 className="text-xl font-bold">{room.roomName}</h3>
+                        <h3 className="text-xl font-medium">{room.roomName}</h3>
                         <p className="text-sm text-gray-500">{room.hotelName}</p>
                       </div>
                       <p className="text-lg font-semibold text-gray-800">

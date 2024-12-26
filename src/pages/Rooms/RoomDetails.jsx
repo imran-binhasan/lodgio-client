@@ -92,7 +92,7 @@ const RoomDetails = () => {
         {/* Room Information */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="col-span-2">
-            <h1 className="text-4xl font-bold mb-2">{roomName}</h1>
+            <h1 className="text-4xl font-medium mb-2">{roomName}</h1>
             <p className="text-gray-500 text-sm mb-4">{hotelName}</p>
             <p className="text-gray-600 text-sm mb-4">{description}</p>
             <p className="text-gray-600 text-sm mb-4">

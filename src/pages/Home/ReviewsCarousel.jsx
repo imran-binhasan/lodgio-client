@@ -42,7 +42,7 @@ const ReviewsCarousel = () => {
 
     return (
         <div className="container mx-auto my-10 px-4">
-            <h2 className="text-center text-2xl font-semibold mb-6">What Our Guests Say</h2>
+            <h2 className="text-center text-3xl font-medium mb-6">What Our Guests Say</h2>
             <Slider {...settings}>
                 {reviewsData.map((review, index) => (
                     <div key={index} className="flex justify-center items-center">

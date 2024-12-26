@@ -23,7 +23,7 @@ const Login = () => {
       const user = { email };
   
       // Request JWT token from the server
-      const response = await axios.post("http://localhost:5000/jwt", user, {
+      const response = await axios.post("https://lodgio-server.vercel.app/jwt", user, {
         withCredentials: true, // Ensures cookies are included in the request
       });
   

@@ -7,7 +7,7 @@ import axios from 'axios';
 const ReviewsCarousel = () => {
     const [reviewsData, setReviewsData] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:5000/reviews`)
+        axios.get(`https://lodgio-server.vercel.app/reviews`)
             .then(res => setReviewsData(res.data))
     }, []);
 

@@ -38,7 +38,7 @@ const Header = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `hover:text-yellow-400 ${isActive ? "text-yellow-400" : ""}`
+            `hover:text-yellow-400 text-lg ${isActive ? "text-yellow-400" : ""}`
           }
         >
           HOME
@@ -46,7 +46,7 @@ const Header = () => {
         <NavLink
           to="/rooms"
           className={({ isActive }) =>
-            `hover:text-yellow-400 ${isActive ? "text-yellow-400" : ""}`
+            `hover:text-yellow-400 text-lg ${isActive ? "text-yellow-400" : ""}`
           }
         >
           ROOMS
@@ -54,16 +54,24 @@ const Header = () => {
         <NavLink
           to="/gallery"
           className={({ isActive }) =>
-            `hover:text-yellow-400 ${isActive ? "text-yellow-400" : ""}`
+            `hover:text-yellow-400 text-lg ${isActive ? "text-yellow-400" : ""}`
           }
         >
           GALLERY
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            `hover:text-yellow-400 text-lg ${isActive ? "text-yellow-400" : ""}`
+          }
+        >
+          CONTACT
         </NavLink>
         {user && (
           <NavLink
             to="/bookings"
             className={({ isActive }) =>
-              `hover:text-yellow-400 ${isActive ? "text-yellow-400" : ""}`
+              `hover:text-yellow-400 text-lg ${isActive ? "text-yellow-400" : ""}`
             }
           >
             MY BOOKINGS

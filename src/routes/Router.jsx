@@ -11,6 +11,7 @@ import RoomDetails from "../pages/Rooms/RoomDetails";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "../pages/Error/NotFound";
+import Contact from "../pages/Contact/Contact";
 
 
 
@@ -34,6 +35,10 @@ const Router = createBrowserRouter([
       {
         path:'/gallery',
         element:<Gallery/>
+      },
+      {
+        path:'/contact',
+        element:<Contact/>
       },
       {
         path:'/room/:id',

@@ -62,7 +62,7 @@ const Rooms = () => {
         </div>
 
         {/* Content Container */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           {loading ? ( // Show loading spinner while loading
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
@@ -98,7 +98,7 @@ const Rooms = () => {
               </div>
 
               {/* Room Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {roomData.map((room, index) => (
                   <div
                     key={index}

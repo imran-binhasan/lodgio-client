@@ -76,7 +76,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden">
+    <div ref={containerRef} className="relative w-full h-[70vh] overflow-hidden">
       {/* Parallax Slides */}
       {slides.map((slide, index) => (
         <div
@@ -115,7 +115,7 @@ const Banner = () => {
         </p>
         <button
           onClick={() => navigate("/rooms")}
-          className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-300"
+          className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition duration-300"
         >
           EXPLORE ROOMS
         </button>

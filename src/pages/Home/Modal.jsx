@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion"; // For animation
 
-const SpecialOffersModal = ({ isOpen, onClose }) => {
+const Modal = ({ isOpen, onClose }) => {
   const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
@@ -101,4 +101,4 @@ const SpecialOffersModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default SpecialOffersModal;
+export default Modal;

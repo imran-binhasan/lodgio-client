@@ -6,6 +6,9 @@ Lodgio simplifies hotel booking with an intuitive, responsive interface for brow
 ## Live URL
 [Live Demo](https://lodgio.netlify.app)
 
+## Screenshots
+![Login page screenshot](login_page.png) ![Hotel page screenshot](hotels.png)
+
 ## Key Features
 - **Responsive Design:** Fully responsive UI with light and dark mode support.
 - **Hotel Listings:** Display hotels with details such as name, location, and price.

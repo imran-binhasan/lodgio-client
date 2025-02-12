@@ -7,8 +7,8 @@ import AuthContext from "../../context/AuthContext";
 const Rooms = () => {
   const [roomData, setRoomData] = useState([]);
   const [priceFilter, setPriceFilter] = useState("");
-  const [currentPage, setCurrentPage] = useState(1); // Track the current page
-  const [totalPages, setTotalPages] = useState(1); // Track total pages
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [totalPages, setTotalPages] = useState(1);
   const { loading, setLoading } = useContext(AuthContext);
 
   useEffect(() => {

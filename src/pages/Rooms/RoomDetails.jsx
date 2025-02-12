@@ -136,7 +136,6 @@ const RoomDetails = () => {
             </ul>
 
             {/* Reviews */}
-            {/* Reviews Section */}
             <h2 className="text-2xl font-medium mb-4">
               Reviews{" "}
               <span className="text-gray-500 text-lg">

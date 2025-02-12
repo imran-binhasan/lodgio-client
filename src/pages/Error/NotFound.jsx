@@ -59,7 +59,7 @@ const NotFound = () => {
             to="/"
             className="inline-block px-6 py-3 bg-gradient-to-r from-teal-400 via-blue-500 to-indigo-600 text-white rounded-lg text-lg font-medium shadow-md hover:from-teal-500 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out"
           >
-            Go Back Home
+            Go Back
           </Link>
         </motion.div>
       </motion.div>
